@@ -1,8 +1,9 @@
 # Powershell.Test.stuff
 
 These are some scripts that can be used to test access to URL's,
-<br>shares, rdp access, ssh access. These can be useful when
-<br> you need to test access to from a new/remote office , remote vpn user, etc.
+<br>shares, RDP access, SSH access. 
+<br>These can be useful when you need to test access from a new/remote office,
+remote vpn user, etc.
 
 
 # Credits
