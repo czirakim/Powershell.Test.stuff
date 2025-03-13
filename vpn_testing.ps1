@@ -36,7 +36,7 @@ function Get-DomainNameFromUrl {
     return $domain
 }
 
-function Get-DomainNameStatus {
+function Get-DomainNameStatusURL {
 Write-Host "  DNS:" -NoNewline	
 # Print each item in the url_list
 		try {
@@ -47,6 +47,16 @@ Write-Host "  DNS:" -NoNewline
 			}
 }
 
+function Get-DomainNameStatus {
+Write-Host "  DNS:" -NoNewline	
+# Print each item in the url_list
+		try {
+			$dnsInfo = Resolve-DnsName  $item -ErrorAction Stop
+			Write-Host -ForegroundColor Green "OK"
+		} catch {
+			Write-Host -ForegroundColor Red "Failed"
+			}
+}
 
 function Test_url {
 # Print each item in the url_list
@@ -60,7 +70,7 @@ foreach ($item in $url_list) {
 	} else {
 		Write-Host -ForegroundColor Red "Failed" -NoNewline	
 	}
-	Get-DomainNameStatus -url $item 
+	Get-DomainNameStatusURL
 }
 }
 	
@@ -75,13 +85,7 @@ foreach ($item in $share_list) {
 	} else {
 		Write-Host -ForegroundColor Red "Failed" -NoNewline	
 	}
-	Write-Host "  DNS: " -NoNewline	
-	try {
-		$dnsInfo = Resolve-DnsName $item -ErrorAction Stop
-		Write-Host -ForegroundColor Green "OK" 
-	} catch {
-		Write-Host -ForegroundColor Red "Failed" 
-		}
+	Get-DomainNameStatus
 }	
 }
 
@@ -96,13 +100,7 @@ foreach ($item in $rdp_list) {
 	} else {
 		Write-Host -ForegroundColor Red "Failed" -NoNewline	
 	}
-	Write-Host "  DNS: " -NoNewline	
-	try {
-		$dnsInfo = Resolve-DnsName $item -ErrorAction Stop
-		Write-Host -ForegroundColor Green "OK" 
-	} catch {
-		Write-Host -ForegroundColor Red "Failed" 
-		}
+	Get-DomainNameStatus
 }
 }
 
@@ -117,13 +115,7 @@ foreach ($item in $ssh_list) {
 	} else {
 		Write-Host -ForegroundColor Red "Failed" -NoNewline	
 	}
-	Write-Host "  DNS: " -NoNewline	
-	try {
-		$dnsInfo = Resolve-DnsName $item -ErrorAction Stop
-		Write-Host -ForegroundColor Green "OK" 
-	} catch {
-		Write-Host -ForegroundColor Red "Failed" 
-		}
+	Get-DomainNameStatus
 }
 }
 
