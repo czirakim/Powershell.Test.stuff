@@ -6,7 +6,7 @@ remote vpn user, home office etc.
 <br>For testing URLs, it is using curl.exe and not the curl alias.
 <br>
 <br> conn_test.ps1 - is a script for testing access to the Internet. It pings different dns servers and it shows you your public IP.
-<br> dns_testing.ps1 - is a script that check the domani nnames from a list of URL.
+<br> dns_testing.ps1 - is a script that check the domain names from a list of URL.
 <br> vpn_testing_ps1 - is a script that tests access to URLs, file shares, RDP access, SSH access
 
 
