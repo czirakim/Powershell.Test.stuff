@@ -22,15 +22,26 @@ function Get-Dns {
 	# Get all network configurations excluding the default interface
 	$networkConfigurations = Get-NetIPConfiguration | Where-Object { $_.InterfaceAlias -ne $defaultInterface.InterfaceAlias }
 	# Filter out configurations where the network adapter is disconnected or DNS server is null
-	$VpnNetworkConfigurations = $networkConfigurations | Where-Object { $_.NetAdapter.Status -ne "Disconnected" -and $_.DNSServer -ne $null }
 
+	$VpnNetworkConfigurations = $networkConfigurations | Where-Object { $_.NetAdapter.Status -ne "Disconnected" -and $_.DNSServer -ne $null } 
 
 	# Display the VPN DNS servers
 	if ($VpnNetworkConfigurations) {
 		# Get the DNS server addresses for the VPN network interface
 		$VpnDnsServers = Get-DnsClientServerAddress -InterfaceAlias $VpnNetworkConfigurations.InterfaceAlias
-		Write-Host -ForegroundColor RED "`n !!! If you are using a VPN, you might not be using the above default DNS servers !!!"
-		Write-Host -ForegroundColor Green "`n VPN DNS Servers: $($VpnDnsServers.ServerAddresses)"
+		# Do not take into account IPv6 site-local address range (fec0::/10)
+		$pattern = "^fec0"
+		$hasMatch = $false
+		foreach ($address in $VpnDnsServers.ServerAddresses) {
+			if ($address -match $pattern) {	
+				$hasMatch = $true
+				break
+			}
+		}	
+		if (!$hasMatch) {
+			Write-Host -ForegroundColor RED "`n !!! If you are using a VPN, you might not be using the above default DNS servers !!!"
+			Write-Host -ForegroundColor Green "`n VPN DNS Servers: $($VpnDnsServers.ServerAddresses)"
+		}
 	}
 }
 function ping {
