@@ -3,6 +3,32 @@ $url_list = @("http://acme.com",
 		  )
 
 
+function Get-Dns {
+
+	$defaultGateway = Get-NetRoute -DestinationPrefix "0.0.0.0/0" |  Where-Object -FilterScript { $_.NextHop -Ne "0.0.0.0" } |  Select-Object -ExpandProperty "NextHop"
+	
+	# Identify the default network interface
+	$defaultInterface = Get-NetRoute -DestinationPrefix "0.0.0.0/0" | Where-Object { $_.NextHop -eq $defaultGateway }
+
+	# Get the DNS server addresses for the default network interface
+	$dnsServers = Get-DnsClientServerAddress -InterfaceAlias $defaultInterface.InterfaceAlias
+		
+	# Display the default DNS servers
+	Write-Host -ForegroundColor Green "`n Default DNS Servers: $($dnsServers.ServerAddresses)"
+			
+	# Get all network configurations excluding the default interface
+	$networkConfigurations = Get-NetIPConfiguration | Where-Object { $_.InterfaceAlias -ne $defaultInterface.InterfaceAlias }
+	# Filter out configurations where the network adapter is disconnected or DNS server is null
+	$VpnNetworkConfigurations = $networkConfigurations | Where-Object { $_.NetAdapter.Status -ne "Disconnected" -and $_.DNSServer -ne $null }
+			
+	# Display the VPN DNS servers
+	if ($VpnNetworkConfigurations) {
+		# Get the DNS server addresses for the VPN network interface
+		$VpnDnsServers = Get-DnsClientServerAddress -InterfaceAlias $VpnNetworkConfigurations.InterfaceAlias
+		Write-Host -ForegroundColor RED "`n !!! If you are using a VPN, you might not be using the above default DNS servers !!!"
+		Write-Host -ForegroundColor Green "`n VPN DNS Servers: $($VpnDnsServers.ServerAddresses) `n"
+	}
+}		  
 function Get-DomainNameFromUrl {
     param (
         [string]$url
@@ -32,4 +58,7 @@ function Get-DomainNameStatus {
 	}
 }
 	
+### main ###
+
+Get-Dns
 Get-DomainNameStatus
