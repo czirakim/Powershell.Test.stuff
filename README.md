@@ -8,8 +8,7 @@ These are some scripts that can be used to test access to URLs, file shares, RDP
 <br> dns_testing.ps1 - is a script that checks the domain names from a list of URLs.
 <br> vpn_testing_ps1 - is a script that tests access to URLs, file shares, RDP access, SSH access
 
-<img width="305" alt="image" src="https://github.com/user-attachments/assets/b02f44b8-894e-40b0-bff9-4ee8fe57ce45" />
-
+<img width="306" alt="Screenshot 2025-03-18 161736" src="https://github.com/user-attachments/assets/60100b9a-e0e0-457e-8f15-293434bd2fbc" />
 
 # Credits
 This was written by Mihai Cziraki
