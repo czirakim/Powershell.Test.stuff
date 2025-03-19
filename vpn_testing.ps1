@@ -19,7 +19,7 @@ $rdp_list = @( "192.168.1.10",
 $ssh_list = @( "192.168.1.12"			
 			)			
 
-$list_repsonse = @( "000" )
+$list_repsonse = @( "000" , $null)
 
 function Get-Dns {
 
@@ -103,16 +103,22 @@ function Test_url {
 		Write-Host " $item " -NoNewline	-ForegroundColor Yellow
 		Write-Host "  StatusCode: " -NoNewline
  
-		$response = . curl -sk -m 10 -o /dev/null -w "%{http_code}" $item
-
-		if ($list_repsonse -notcontains $response) {
-			Write-Host -ForegroundColor Green $response -NoNewline
-		} else {
-			Write-Host -ForegroundColor Red "Failed" -NoNewline	
+		#$response = . curl -sk -m 10 -o /dev/null -w "%{http_code}" $item
+                # below the version without curl, using the native PowerShell command
+		try {
+            	$response = Invoke-WebRequest -Uri $item -TimeoutSec 10 -ErrorAction Stop
+            	$statusCode = $response.StatusCode
+       	 	} catch {
+        	# If there was an error, get the status code from the exception
+            	$statusCode = $_.Exception.Response.StatusCode.value__
+        	}  
+        	if ($list_repsonse -notcontains $statusCode ) {
+            	Write-Host -ForegroundColor Green $statusCode -NoNewline
+        	} else {
+            	Write-Host -ForegroundColor Red "Failed" -NoNewline
+        	}
+        	Get-DomainNameStatus -url $item
 		}
-
-		Get-DomainNameStatus -url $item
-	}
 }
 	
 function Test_share {
