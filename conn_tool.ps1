@@ -36,8 +36,9 @@ function Test_rdp  {
     )
 
     Write-Host -ForegroundColor Yellow -NoNewline "`n Testing RDP to host $Name "
-    Write-Host -NoNewline " Result: "    
-    $response = Test-NetConnection  -ComputerName $Name -CommonTCPPort RDP -InformationLevel "Quiet"
+    Write-Host -NoNewline " Result: "
+    
+    $response = Test-NetConnection  -ComputerName $Name -CommonTCPPort RDP -InformationLevel "Quiet" -WarningAction SilentlyContinue
            
     if ($response) {
         Write-Host -ForegroundColor Green "OK" -NoNewline  
@@ -58,7 +59,7 @@ function Test_ssh  {
     Write-Host -ForegroundColor Yellow -NoNewline "`n Testing ssh to host $Name"
     Write-Host -NoNewline " Result: "
        
-    $response = Test-NetConnection  -ComputerName $Name -Port 22 -InformationLevel "Quiet"
+    $response = Test-NetConnection  -ComputerName $Name -Port 22 -InformationLevel "Quiet" -WarningAction SilentlyContinue
        
     if ($response) {
         Write-Host -ForegroundColor Green "OK" -NoNewline  
@@ -81,7 +82,7 @@ function Test_share {
     Write-Host -ForegroundColor Yellow -NoNewline "`n Testing Share Paths to host $Name"
     Write-Host -NoNewline " Result: "
        
-    $response = Test-NetConnection  -ComputerName $Name -CommonTCPPort SMB -InformationLevel "Quiet"
+    $response = Test-NetConnection  -ComputerName $Name -CommonTCPPort SMB -InformationLevel "Quiet" -WarningAction SilentlyContinue
    
     if ($response) {
         Write-Host -ForegroundColor Green "OK" -NoNewline  
@@ -101,7 +102,7 @@ function Get-UserInput {
 
     # Prompt for name
     $name = Read-Host "`n Please enter what you want to test (RDP,SSH,file-share)"
-    switch ($name) {
+    switch ($name.Trim()) {
         "rdp" {
             $dest = Read-Host " Please enter destination host you want to test"
             Test_rdp -Name $dest
