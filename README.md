@@ -7,7 +7,7 @@ These are some scripts that can be used to test access to URLs, file shares, RDP
 <br> dns_testing.ps1 - is a script that checks the domain names from a list of URLs.
 <br> vpn_testing_ps1 - is a script that tests access to URLs, file shares, RDP access, SSH access
 <br> conn_tool.ps1 - this is an interactive tool to test a specific protocol (rdp, ssh,file-share) to a specific host provided by user in the CLI
-<br> It can also do multiple tests, like: ssh,port,rdp
+<br> It can also do multiple tests, like: ssh, port,rdp
 <br> process_csv.ps1 - This script takes a CSV file exported from a device with routing info and exports only the fields we need to another destination CSV file
 <br> iplookup.ps1 - This script takes an IP as an argument(CLI) and determines which site this IP is from. It needs a destination CSV file processed by process_csv.ps1
 <br>
