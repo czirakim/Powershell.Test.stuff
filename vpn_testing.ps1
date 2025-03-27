@@ -180,6 +180,10 @@ function Test_ssh  {
 
 ### main ###
 
+$date = (Get-Date).ToUniversalTime().ToString("HH:mm:ss dd-MM-yyyy")
+Write-Host -ForegroundColor Green "`n This has been run at (UTC): $date"
+
+
 Write-Host -ForegroundColor Green "`n Starting tests ... "
 Get-Dns
 Test_url
