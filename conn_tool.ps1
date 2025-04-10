@@ -30,7 +30,7 @@ function Get-DomainNameStatus {
             $domainName = Get-DomainNameFromUrl -url $url
         }
         
-        $dnsInfo = Resolve-DnsName $domainName -ErrorAction Stop
+        $dnsInfo = Resolve-DnsName $domainName -type A -ErrorAction Stop
         Write-Host -NoNewline -ForegroundColor Green "OK"
     } catch {
         Write-Host -NoNewline -ForegroundColor Red "Failed"
