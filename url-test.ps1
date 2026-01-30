@@ -1,12 +1,12 @@
 # This script takes URLs from a file and then gets the cert info
 
-$list_repsonse - @( "000", $null)
-$san - @()
+$list_repsonse = @( "000", $null)
+$san = @()
 
 # Path to the file
 $FilePath = "destinations-url.txt"
 # Import the file 
-$data Get-Content -Path $FilePath
+$data = Get-Content -Path $FilePath
 
 function Test_url {
     # Print each item in the url_list 
