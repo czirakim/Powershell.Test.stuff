@@ -10,7 +10,7 @@ These are some scripts that can be used to test access to URLs, file shares, RDP
 <br> It can also do multiple tests, like: ssh, port,rdp
 <br> process_csv.ps1 - This script takes a CSV file with routing info, exported from a device, and processes it (subnet and remote device name), and then exports to another destination CSV file (subnet and remote location)
 <br> iplookup.ps1 - This script takes an IP as an argument(CLI) and determines which site this IP is from. It needs a destination CSV file processed by process_csv.ps1
-<br>
+<br> url-test.ps1 - This script takes URLs from a file, and fetches the cert info
 
   <img width="306" alt="Screenshot 2025-03-18 161736" src="https://github.com/user-attachments/assets/60100b9a-e0e0-457e-8f15-293434bd2fbc" />
 
