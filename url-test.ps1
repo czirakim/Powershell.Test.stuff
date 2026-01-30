@@ -1,3 +1,5 @@
+# This script takes URLs from a file and then gets the cert info
+
 $list_repsonse - @( "000", $null)
 $san - @()
 
