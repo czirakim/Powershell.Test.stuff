@@ -1,14 +1,15 @@
 #This is a script for searching in the Solarwinds NCM config files via Rest API
 #
 # CLI searchTerm parameter
+
 param(
-    [Parameter (Position-0, Mandatory=$true)]
+    [Parameter (Position=0, Mandatory=$true)]
     [string]$searchTerm,
     [Parameter (Position=1, Mandatory=$false)]
     [string]$days=7
     )
 # Load var file
-$configFile Join-Path $HOME ".env.ps1"
+$configFile = Join-Path $HOME ".env.ps1"
 .$configFile
 
 #skip cert validation
@@ -46,6 +47,7 @@ ORDER BY NcmArchive.DownloadTime DESC"
 $uri = $base_uri
 
 $body = $query | ConvertTo-Json -Compress
+
 try {
     $response = Invoke-RestMethod -Uri $uri -Method Post -Headers $headers -Body $body -UseBasicParsing
 } catch { 
