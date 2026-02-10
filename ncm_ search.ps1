@@ -60,7 +60,7 @@ if ($null -eq $response.results -or $response.results.Count -eq 0) {
     Write-Warning "The SQL query returned no results from SolarWinds."
     return # Stop the script here 
 }
-
+<#
 $uniqueResults = $response.results | 
     Group-Object DeviceName |
     ForEach-Object
@@ -68,7 +68,7 @@ $uniqueResults = $response.results |
         # Sort each group by date and pick the first (newest) one
         $_.Group | Sort-Object DownloadTime -Descending | Select-Object -First 1
     }
-
+#>
 $finalResults = $response.results |
     # Exclude any DeviceName containing 'Standby' (case-insensitive)
     Where-Object { $_.DeviceName -notlike "*Standby*" } |
