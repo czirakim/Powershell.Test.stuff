@@ -1,6 +1,7 @@
 # This is a script for searching in the Solarwinds NCM config files via Rest API
 # searchTerm can be any string you want to search, example: access-list-100 or an ip like 10.0.0.1
 # days is the last number of days you want to do the search for
+# this was tested in PowerShell 5
 
 
 # CLI searchTerm parameter
