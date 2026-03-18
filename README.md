@@ -12,6 +12,7 @@ These are some scripts that can be used to test access to URLs, file shares, RDP
 <br> **iplookup.ps1** - This script takes an IP as an argument(CLI) and determines which site this IP is from. It needs a destination CSV file processed by process_csv.ps1
 <br> **url-test.ps1** - This script takes URLs from a file, and fetches the cert info
 <br> **ncm_ search.ps1** - This is a script for searching in the Solarwinds NCM config files via Rest API. Ex: ncm_search.ps1 access-list-99 
+<br> **url-redirect-test.ps1** - test a list of URLs for redirects like 301,302 etc
 
 
   <img width="306" alt="Screenshot 2025-03-18 161736" src="https://github.com/user-attachments/assets/60100b9a-e0e0-457e-8f15-293434bd2fbc" />
