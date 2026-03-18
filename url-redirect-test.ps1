@@ -6,7 +6,7 @@
     This script tests a URL redirect chain
 
 .EXAMPLE
-    .\url-redirect-tests.ps1
+    .\url-redirect-test.ps1
 #>
 
 $FilePath = "urls.txt"
